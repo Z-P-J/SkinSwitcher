@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zxy.skin.demo">
+    package="com.zpj.skin.demo">
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 
     <application
@@ -11,15 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
 
-        <activity android:name="com.zxy.skin.demo.activity.Activity1">
+        <activity android:name=".activity.Activity1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.zxy.skin.demo.activity.Activity2"></activity>
-        <activity android:name="com.zxy.skin.demo.activity.Activity3"></activity>
+        <activity android:name=".activity.Activity2"></activity>
+        <activity android:name=".activity.Activity3"></activity>
 
     </application>
 

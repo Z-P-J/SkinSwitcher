@@ -13,7 +13,7 @@
         android:orientation="vertical"
         android:layout_weight="1">
 
-       <com.zxy.skin.demo.widget.CustomView
+       <com.zpj.skin.demo.widget.CustomView
            android:layout_width="80dp"
            android:layout_height="80dp"
            app:lineColor="?attr/line_color"/>

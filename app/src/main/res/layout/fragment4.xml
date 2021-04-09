@@ -12,6 +12,6 @@
         android:id="@+id/fragment5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.zxy.skin.demo.fragment.Fragment5"></fragment>
+        android:name="com.zpj.skin.demo.fragment.Fragment5"></fragment>
 
 </LinearLayout>

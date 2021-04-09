@@ -1,9 +1,13 @@
-# chameleon
+# SkinSwitcher
 Android Change Skin,  Android Night Mode, 安卓换肤，安卓夜间模式
 
-方便的话给个star! ️✨
-
 ![screenshot](static/demo.gif)
+
+## Install
+
+````gradle
+implementation 'com.github.Z-P-J:SkinSwitcher:1.0.0'
+````
 
 ## 如何使用
 
@@ -176,7 +180,7 @@ public class SkinFragment extends Fragment {
 ```
 ### 3、扩展 SkinApplicator
 
-lib 项目中只写了 SkinViewApplicator 和 SkinTextViewApplicator ，支持 backgroud， textColor
+lib 项目中只写了 SkinViewApplicator 和 SkinTextViewApplicator ，支持 background， textColor
 等属性的换肤操作，其他属性的 Applicator 编写可以参照这两个以及样例中的 SkinCustomViewApplicator。
 新增的 Applicator 需要注册到框架中。
 

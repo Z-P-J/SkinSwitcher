@@ -6,7 +6,7 @@ Android Change Skin,  Android Night Mode, 安卓换肤，安卓夜间模式
 ## Install
 
 ````gradle
-implementation 'com.github.Z-P-J:SkinSwitcher:1.0.0'
+implementation 'com.github.Z-P-J:SkinSwitcher:1.0.1'
 ````
 
 ## 如何使用

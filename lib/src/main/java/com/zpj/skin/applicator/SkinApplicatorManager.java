@@ -21,7 +21,7 @@ public class SkinApplicatorManager {
 
     private static final SkinViewApplicator defaultSkinApplicator = new SkinViewApplicator();
 
-    private static final HashMap<Class, SkinViewApplicator> applicatorsMap = new HashMap<>();
+    private static final HashMap<Class<? extends View>, SkinViewApplicator> applicatorsMap = new HashMap<>();
 
     static {
 

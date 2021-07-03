@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.CardView;
 import android.util.ArrayMap;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,9 +16,10 @@ import android.widget.TextView;
 import com.zpj.skin.applicator.SkinApplicatorManager;
 import com.zpj.skin.applicator.SkinViewApplicator;
 
-import java.util.HashMap;
+import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.WeakHashMap;
 
 /**
  * github: https://github.com/zhaoxuyang/chameleon
@@ -30,7 +32,7 @@ public class SkinEngine {
 
     private static final HashSet<ISkinObserver> skinObservers = new HashSet<>();
 
-    private static final HashMap<View, SkinViewWrapper> skinViewMap = new HashMap<>();
+    private static final WeakHashMap<View, ViewSkinObserver> skinViewMap = new WeakHashMap<>();
 
     private static int themeId;
 
@@ -74,7 +76,7 @@ public class SkinEngine {
      * @param observer
      */
     public static void registerSkinObserver(ISkinObserver observer) {
-        if (observer != null && !skinObservers.contains(observer)) {
+        if (observer != null) {
             skinObservers.add(observer);
         }
     }
@@ -156,7 +158,7 @@ public class SkinEngine {
         applyViewAttr(view, "tint", tintColorAttrId);
     }
 
-    public static void setCardBackgroundColor(ImageView view, int colorAttrId) {
+    public static void setCardBackgroundColor(CardView view, int colorAttrId) {
         applyViewAttr(view, "cardBackgroundColor", colorAttrId);
     }
 
@@ -167,27 +169,25 @@ public class SkinEngine {
      * @param skinAttrId
      */
     public static void applyViewAttr(View view, String attrName, int skinAttrId) {
-        SkinViewWrapper skinViewWrapper = skinViewMap.get(view);
-        if (skinViewWrapper == null) {
-            skinViewWrapper = new SkinViewWrapper(view);
-            skinViewMap.put(view, skinViewWrapper);
-            skinObservers.add(skinViewWrapper);
+        ViewSkinObserver viewSkinObserver = skinViewMap.get(view);
+        if (viewSkinObserver == null) {
+            viewSkinObserver = new ViewSkinObserver(view);
+            skinViewMap.put(view, viewSkinObserver);
+            skinObservers.add(viewSkinObserver);
         }
-        skinViewWrapper.attrsMap.put(attrName, skinAttrId);
-        view.getContext().setTheme(SkinEngine.getSkin());
-        SkinApplicatorManager.getApplicator(view.getClass()).apply(view, skinViewWrapper.attrsMap);
+        viewSkinObserver.attrsMap.put(attrName, skinAttrId);
+        SkinApplicatorManager.getApplicator(view.getClass()).apply(view, viewSkinObserver.attrsMap);
     }
 
     /** 解除对view的监控
      * @param view
      */
     public static void unRegisterSkinObserver(View view) {
-        SkinViewWrapper skinViewWrapper = skinViewMap.get(view);
-        if (skinViewWrapper != null) {
+        ViewSkinObserver viewSkinObserver = skinViewMap.get(view);
+        if (viewSkinObserver != null) {
             skinViewMap.remove(view);
-            skinObservers.remove(skinViewWrapper);
+            skinObservers.remove(viewSkinObserver);
         }
-
     }
 
 
@@ -202,18 +202,22 @@ public class SkinEngine {
 
     }
 
-    static class SkinViewWrapper implements ISkinObserver {
+    private static class ViewSkinObserver implements ISkinObserver {
 
-        View view;
+        private final WeakReference<View> viewWeakReference;
 
-        ArrayMap<String, Integer> attrsMap = new ArrayMap<>();
+        private final ArrayMap<String, Integer> attrsMap = new ArrayMap<>();
 
-        SkinViewWrapper(View view) {
-            this.view = view;
+        private ViewSkinObserver(View view) {
+            this.viewWeakReference = new WeakReference<>(view);
         }
 
         @Override
         public boolean onChangeSkin() {
+            View view = viewWeakReference.get();
+            if (view == null) {
+                return false;
+            }
             SkinApplicatorManager.getApplicator(view.getClass()).apply(view, attrsMap);
             return true;
         }

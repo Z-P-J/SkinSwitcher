@@ -258,18 +258,12 @@ public class SkinLayoutInflater extends LayoutInflater implements LayoutInflater
             return view;
         } catch (InflateException e) {
             throw e;
-
-        } catch (ClassNotFoundException e) {
-            final InflateException ie = new InflateException(attrs.getPositionDescription()
-                    + ": Error inflating class " + name, e);
-            ie.setStackTrace(EMPTY_STACK_TRACE);
-            throw ie;
-
         } catch (Exception e) {
             final InflateException ie = new InflateException(attrs.getPositionDescription()
                     + ": Error inflating class " + name, e);
             ie.setStackTrace(EMPTY_STACK_TRACE);
             throw ie;
+
         }
 
     }

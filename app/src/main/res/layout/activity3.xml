@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="?attr/main_bg">
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -14,7 +14,7 @@
         android:layout_weight="1">
 
 
-    </android.support.v4.view.ViewPager>
+    </androidx.viewpager.widget.ViewPager>
 
     <include
         android:id="@+id/change_skin_tab"

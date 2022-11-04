@@ -2,7 +2,7 @@ package com.zpj.skin.applicator;
 
 import android.content.res.TypedArray;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import android.util.ArrayMap;
 import android.view.View;
 

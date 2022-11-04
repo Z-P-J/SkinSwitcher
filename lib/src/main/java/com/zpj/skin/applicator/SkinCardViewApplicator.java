@@ -2,7 +2,7 @@ package com.zpj.skin.applicator;
 
 
 import android.content.res.TypedArray;
-import android.support.v7.widget.CardView;
+import androidx.cardview.widget.CardView;
 
 public class SkinCardViewApplicator extends SkinViewApplicator {
 

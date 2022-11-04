@@ -10,7 +10,7 @@ import android.util.Log;
  */
 public class Logger {
 
-    private static boolean debug = true;
+    private static boolean debug = false;
 
     public static void setDebug(boolean d) {
         debug = d;
